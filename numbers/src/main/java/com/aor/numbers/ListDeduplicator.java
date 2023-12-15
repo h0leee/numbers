@@ -12,7 +12,7 @@ public class ListDeduplicator implements GenericListDeduplicator{
     /**
      * Removes duplicate numbers from a list.
      * @return A list having the same numbers as the original
-     * but withou duplicates. The order of the numbers might
+     * but without duplicates. The order of the numbers might
      * change.
      */
     private final GenericListSorter sorter;

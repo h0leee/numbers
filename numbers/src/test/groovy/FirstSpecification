@@ -1,0 +1,67 @@
+import com.aor.numbers.GenericListDeduplicator
+import spock.lang.Specification
+
+class FirstSpecification extends Specification {
+
+    def "one plus one should equal two"() {
+        expect:
+            1 + 1 == 2
+    }
+
+    def "two plus two equals four"() {
+        setup:
+            int left = 2
+            int right = 2
+
+        when:
+            int result = left + right
+
+        then:
+            result == 4
+    }
+
+    def "Should be able to remove from list"() {
+        given:
+            def list = [1, 2, 3, 4] // def meio que funciona como auto em c++
+
+        when:
+            list.remove(0)
+
+        then:
+            list == [2, 3, 4] // under the hood não se comparam referências como em java, usa-se o .equals()
+    }
+
+    def "Should get an index out of bounds when removing a non-existing item"() {
+        given:
+            def list = [1, 2, 3, 4]
+
+        when:
+            list.remove(20)
+
+        then:
+            thrown(IndexOutOfBoundsException) // não tive de importar nenhuma library e não vai parar de executar, vai para a próxima instrução
+            list.size() == 4;
+    }
+
+    def "numbers to the power of two"(int a, int b, int c) {
+        expect:
+            Math.pow(a, b) == c;
+
+        where:
+            a | b | c
+            1 | 2 | 1
+            2 | 2 | 4
+            3 | 2 | 9
+    }
+
+    def "distintWithMock"() {
+        GenericListDeduplicator deduplicator = Mock(GenericListDeduplicator)
+        def deduplicator = Mock(GenericListDeduplicator)
+
+        when:
+            def result = deduplicator.deduplicate(Arrays.asList(1, 2, 4, 2))
+
+        then:
+            result == null
+    }
+}
